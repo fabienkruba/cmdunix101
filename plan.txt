@@ -1,0 +1,88 @@
+- basics of unix command lines:
+	 not being affraid of the dark (terminal)
+
+- foundations of 'Unix'es
+
+	- kernel, devices, processes
+	
+	- base filesystem
+	
+	- users and permissions
+	
+	
+	
+- basic commands
+
+	- the shell, piping commands
+	
+	- who, where, when , what
+		id whoami
+		pwd
+		hostname
+		time
+		
+		
+	- getting help
+	
+		man
+		info
+		
+	
+	- exploring the filesystem
+	
+		cd 
+		ls
+	
+	- useful commands
+	
+		grep
+		find
+		wc
+		
+	
+	- viewing files
+	
+		cat
+		more/less
+		head tail
+
+
+- more advanced
+		
+	- system status
+		ps
+		top
+		netstat
+		
+		
+		
+	- filesystem manipulation
+	
+		mkdir
+		rm ; rmdir
+		cp
+		
+		
+	- edit a file 
+		
+		vi
+		
+		
+	- save some space : tar / gzip / bzip 
+		
+		
+- advanced shell, switching identities
+
+	- example of a shell script
+	
+	- mount, du , df
+	
+	- using sudo
+	
+	- lsof : a nice swiss army knife for files
+	
+
+	
+	
+	
+	
