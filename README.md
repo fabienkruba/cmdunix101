@@ -89,26 +89,3 @@ This error can usually be fixed with the following command
 [source](http://stackoverflow.com/questions/18149546/vagrant-up-failed-dev-vboxnetctl-no-such-file-or-directory)
 
 
-
-## Problem with IE8 ??
-
-### CSS3 Media Queries won't apply in LOCAL and DEV-MASTER for for IE8 this issue should not append in QA, UAT and PROD.
- 	
-The issue is related to the way Drupal add css into the page (@import) when he is in developpement mode. With this technique CSS3 Media Queries Polyfill will not be able to do is job.
-To fix this issue localy you can install a Drupal plugin. This plugin must not be install in DEV-MASTER, QA, UAT and PROD.
-
-from your guest ( so after vagrant ssh)
-
-To install this plugin:
-
-	cd /opt/drupal/sites/admtl
-	drush en link_css -y
-	
-To uninstall this plugin:
-
-	cd /opt/drupal/sites/admtl
-	drush dis link_css -y
-	
-## Change Drupal Admin password localy
-
-	drush @dev.main upwd --password="banana" admin 
