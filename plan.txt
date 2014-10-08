@@ -13,13 +13,14 @@
 	
 - basic commands
 
-	- the shell, piping commands
+	- the shell, piping and redirections
 	
 	- who, where, when , what
 		id whoami
 		pwd
 		hostname
-		time
+
+		date
 		
 		
 	- getting help

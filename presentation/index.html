@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <link href="css/reset.css" rel="stylesheet" />
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="css/favicon.png" />
+    <link rel="apple-touch-icon" href="css/apple-touch-icon.png" />
+    <!-- Code Prettifier: -->
+<link href="css/highlight.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+    <link href="css/style.css" rel="stylesheet" />
+
+  </head>
+
+  <body>
+  <div class="fallback-message">
+  <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+  <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+    <div id="impress">
+    <div class='step' >
+    
+<h2>don&#39;t be affraid of the dark (terminal)</h2>
+
+<h3>just a simple command line 101</h3>
+</div>
+      <div class='step' >
+    
+<h2>don&#39;t be affraid of the dark</h2>
+
+<h3>this presentation features</h3>
+
+<ul>
+<li>base foundations of Unix(es) (<em>have a coffee or a redbull</em>)</li>
+<li>basic commands (<em>harmless</em>)</li>
+<li>more advanced (<em>spicy</em>)</li>
+<li>advanced shell, switching identities (<em>danger</em>)</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Kernel, processes</h3>
+
+<p>The kernel is part of the whole operating system </p>
+
+<ul>
+<li>task scheduling</li>
+<li>ressources allocation (memory)</li>
+<li>networking </li>
+<li>peripheral access </li>
+<li>security</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h2>Processes (1/2)</h2>
+
+<ul>
+<li>Every program runs under a context called a <em>process</em></li>
+<li>Kernel manages its execution</li>
+<li>A process has a Process Id ( PID )</li>
+<li>A process has a parent process ( PPID )</li>
+<li>There is a root process called &#39;init&#39; with pid 1, it adopts orphan processes</li>
+</ul>
+<pre><code class='prettyprint '>vagrant@precise32:~$ ps -eaf | grep init
+root         1     0  0 Oct07 ?        00:00:01 /sbin/init
+
+</code></pre></div>
+      <div class='step' >
+    
+<h2>Processes (2/2)</h2>
+
+<ul>
+<li>A process has its memory space allocated by the kernel.</li>
+<li>A process has an &#39;environment&#39; ( a key/value hash)</li>
+<li>A process has certain number of file descriptors corresponding to open files ( files, libraries, network connections) </li>
+<li>There are usually 3 defaults <em>FD</em> open when a process starts
+
+<ul>
+<li>STDIN / 0 =&gt; standard input</li>
+<li>STDOUT / 1 =&gt; standard output</li>
+<li>STDERR / 2 =&gt; standard error output</li>
+</ul></li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h2>Base filesystem</h2>
+
+<p>Unix leverage a unique file system tree, but can handle different filesystems under a <em>mount point</em></p>
+<pre><code class='prettyprint '>vagrant@precise32:~$ ls /
+bin   etc         lib         mnt   root  selinux  tmp      var
+boot  home        lost+found  opt   run   srv      usr      vmlinuz
+dev   initrd.img  media       proc  sbin  sys      vagrant
+vagrant@precise32:~$ ls /usr
+bin  games  include  lib  local  sbin  share  src
+vagrant@precise32:~$ ls /var    
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp  www
+</code></pre>
+<p>Most common folders:</p>
+
+<ul>
+<li>/bin , /usr/bin  : base user commands</li>
+<li>/sbin , /usr/sbin : administrative commands ( mostly for super-user)</li>
+<li>/etc : system configuration</li>
+<li>/var : work files for &#39;daemons&#39; (mail, mysql, apache...)</li>
+<li>/var/log : where most of default service are logging</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h2>Base filesystem</h2>
+
+<p>Most common folders:</p>
+
+<ul>
+<li>/tmp : temporary</li>
+<li>/proc : pseudo filesystem to retrieve informations from the kernel</li>
+<li>/dev : contains special files to acces peripherals (rarely used by end user)</li>
+<li>/home : usually parent folders of user accounts (non root)</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<p>A quick sample
+Having fun with pseudo file:</p>
+<pre><code class='prettyprint '>vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
+4bHzIiSB
+vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
+A2GCVPpR
+vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
+LMtE2jc1
+</code></pre>
+<p>Use the pseudo-random generator to generate random passwords of 8 characters</p>
+</div>
+      <div class='step' >
+    
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Users and permissions</h3>
+
+<ul>
+<li>Unix is a <em>multitask</em> and <em>multiuser</em> operating system.</li>
+<li>Super user is called &#39;root&#39;</li>
+<li>A user belongs to a certain number of groups</li>
+<li>A user usually cannot acces ressources of another user</li>
+<li>A file has a certain number of permissions (Read/Write/Execute) for owner,member of group, and others</li>
+</ul>
+<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ ls -la
+total 1900
+drwxr-xr-x 1 vagrant vagrant    170 Oct  3 15:33 .
+drwxr-xr-x 1 vagrant vagrant    476 Oct  3 18:46 ..
+-rw-r--r-- 1 vagrant vagrant 534318 Oct  3 15:33 4548.txt
+-rw-r--r-- 1 vagrant vagrant 460559 Oct  3 15:33 4791.txt
+-rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
+</code></pre></div>
+      <div class='step' >
+    
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>There are many variants of Unix</h3>
+
+<ul>
+<li>Linux ( in a lot of flavors - even Android) - might work on your electric toothbrush</li>
+<li>MacosX (Darwin, Apple ) and iOS</li>
+<li>Solaris (Sun, now Oracle)</li>
+<li>AIX (IBM)</li>
+</ul>
+
+<p>But also</p>
+
+<ul>
+<li>BSD&#39;s :  FreeBSD, OpenBSD, NetBSD..</li>
+<li>HP-UX</li>
+</ul>
+
+<p>And a lot of &#39;dead&#39; ones: <em>Irix</em>, <em>SCO/UnixWare</em>... </p>
+
+      </div>
+    <script src="js/impress.js"></script>
+    <script>impress().init();</script>
+  </body>
+</html>
+    

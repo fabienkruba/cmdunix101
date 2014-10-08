@@ -4,6 +4,13 @@ Unix Command Line 101
 This repository contains tutorial for Command Line 101
 
 
+# Generate presentation
+
+# to generate the presentation:
+sudo gem install mdpress
+mdpress -s nurun -a presentation.md
+
+
 
 #Starting up a dev environment (with vagrant)
 
