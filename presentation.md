@@ -427,4 +427,32 @@ Jules Verne
 
 ###Commands:  reading files
 
-	- cat : **cat**enate
+- cat : con**cat**enate
+	
+	just output the content of one or more files to the standard output
+	there is no really way to limit the flow , but the command is useful to inject content in a pipe for another command
+	
+	there is also *zcat* and *bzcat* which can output content from a gzipped/bzipped files.
+	
+- more/less
+
+	it's cat with a pagination, *less* is a bit more feature rich (go forward and backward)
+	
+- head/tail
+
+	can show the first (*head*) or last (*tail*) lines of a file or a stream
+	
+	One of the most useful command to monitor a file: the -f option keeps reading the file and output content as it comes.
+	
+	
+	````
+	vagrant@precise32:/var/log$ tail -f /var/log/syslog
+	````
+--- 
+
+
+###Commands:  a bit more advanced
+
+#### 
+	
+	

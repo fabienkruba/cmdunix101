@@ -439,8 +439,30 @@ Jules Verne
       <div class='step' >
     
 <h3>Commands:  reading files</h3>
-<pre><code class='prettyprint '>- cat : **cat**enate
-</code></pre>
+
+<ul>
+<li><p>cat : con<strong>cat</strong>enate</p>
+
+<p>just output the content of one or more files to the standard output
+there is no really way to limit the flow , but the command is useful to inject content in a pipe for another command</p>
+
+<p>there is also <em>zcat</em> and <em>bzcat</em> which can output content from a gzipped/bzipped files.</p></li>
+<li><p>more/less</p>
+
+<p>it&#39;s cat with a pagination, <em>less</em> is a bit more feature rich (go forward and backward)</p></li>
+<li><p>head/tail</p>
+
+<p>can show the first (<em>head</em>) or last (<em>tail</em>) lines of a file or a stream</p>
+
+<p>One of the most useful command to monitor a file: the -f option keeps reading the file and output content as it comes.</p>
+<pre><code class='prettyprint '>vagrant@precise32:/var/log$ tail -f /var/log/syslog
+</code></pre></div>
+      <div class='step' >
+    </li>
+</ul>
+
+<h3>Commands:  a bit more advanced</h3>
+
       </div>
     <script src="js/impress.js"></script>
     <script>impress().init();</script>

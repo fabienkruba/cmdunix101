@@ -177,6 +177,12 @@ body {
 	background: white;
 }
 
-ul > li > em {
+em {
 	font-style: italic;
+}
+strong {
+	font-weight: bold;
+}
+ul > li > p {
+	font-size: 80%;
 }
