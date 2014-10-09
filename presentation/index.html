@@ -252,6 +252,8 @@ total 1900
 
 <p>And now we can chain elementary commands into a bigger and more complex process, but we need some commands</p></li>
 </ul>
+
+<p><strong>Careful with redirections</strong> there is a risk of overwritting a file !</p>
 </div>
       <div class='step' >
     
@@ -461,7 +463,117 @@ there is no really way to limit the flow , but the command is useful to inject c
     </li>
 </ul>
 
-<h3>Commands:  a bit more advanced</h3>
+<h2>Commands:  a bit more advanced</h2>
+
+<p>Those are less usual for a enduser who just checks for some logs.</p>
+
+<h3>system status.</h3>
+
+<ul>
+<li><p>ps : <strong>p</strong>rocesses <strong>s</strong>napshot </p>
+<pre><code class='prettyprint '>vagrant@precise32:~$ ps
+  PID TTY          TIME CMD
+ 7382 pts/0    00:00:00 bash
+ 7776 pts/0    00:00:00 ps
+
+vagrant@precise32:~$ ps -eaf
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Oct07 ?        00:00:01 /sbin/init
+root         2     0  0 Oct07 ?        00:00:00 [kthreadd]
+root         3     2  0 Oct07 ?        00:00:01 [ksoftirqd/0]
+root         6     2  0 Oct07 ?        00:00:00 [migration/0]
+root         7     2  0 Oct07 ?        00:00:02 [watchdog/0]
+
+</code></pre>
+<p>just have a status of the running processes, useful to verify if a process is running.</p></li>
+<li><p>top</p>
+
+<p>an interactif process status, show memory and cpu information.</p></li>
+</ul>
+</div>
+      <div class='step' >
+    
+<ul>
+<li><p>netstat: <strong>net</strong>work <strong>stat</strong>us</p>
+
+<p>snapshot of the network connections:</p>
+<pre><code class='prettyprint '>vagrant@precise32:~$ netstat -an 
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:60272           0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
+</code></pre>
+<p>This command is usually interesting to verify which connexions are established, listening and even if you have some firewall issues (when you have a state &#39;SYN_SENT&#39;)</p></li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h2>Commands:  a bit more advanced</h2>
+
+<h3>filesystem modifications.</h3>
+
+<ul>
+<li><p>mkdir : <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>rectory</p></li>
+<li><p>rm ; rmdir : <strong>r</strong>e*<em>m</em>ove file, or directory, simple or recursive</p></li>
+<li><p>cp : <strong>c</strong>o<strong>p</strong>y file, directory, simple or recursive</p></li>
+</ul>
+
+<h3>edit a file</h3>
+
+<ul>
+<li><p>vi : <strong>VI</strong>sual editor</p>
+
+<p>your worst nightmare, the consistent editor present everywhere..</p>
+
+<p>getting out of vi without saving a file</p>
+<pre><code class='prettyprint '>*ESC* : q !
+</code></pre>
+<p>saving and getting out of vi:</p>
+<pre><code class='prettyprint '>*ESC* : w q !
+</code></pre></li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h3>save some space</h3>
+
+<ul>
+<li>tar : <strong>t</strong>ape  <strong>a</strong>rchive, just assemble a file set into a file, no compression, non destruction</li>
+<li>gzip : compress a file (<em>g</em>nu <em>zip</em>), <strong>remove the original file</strong></li>
+<li><p>gunzip : reciprocity of gzip: uncompress a file, remove the original file.</p>
+<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ tar cvf jules-vernes.tar *.txt
+4548.txt
+4791.txt
+pg5097.txt
+vagrant@precise32:/vagrant/demo$ ls -lrt
+total 3800
+-rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
+-rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
+-rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
+-rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:23 jules-vernes.tar
+vagrant@precise32:/vagrant/demo$ gzip jules-vernes.tar 
+vagrant@precise32:/vagrant/demo$ ls -lrt
+total 2608
+-rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
+-rw-r--r-- 1 vagrant vagrant 534318 Oct  3 15:33 4548.txt
+-rw-r--r-- 1 vagrant vagrant 460559 Oct  3 15:33 4791.txt
+-rw-r--r-- 1 vagrant vagrant 722739 Oct  9 19:23 jules-vernes.tar.gz
+vagrant@precise32:/vagrant/demo$ gunzip jules-vernes.tar.gz 
+vagrant@precise32:/vagrant/demo$ ls -lrt
+total 3800
+-rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
+-rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
+-rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
+-rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:26 jules-vernes.tar
+</code></pre></div>
+      <div class='step' >
+    </li>
+</ul>
+
+<h2>Advanced shell</h2>
 
       </div>
     <script src="js/impress.js"></script>

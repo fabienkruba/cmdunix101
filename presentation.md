@@ -214,6 +214,8 @@ total 1900
 
 	And now we can chain elementary commands into a bigger and more complex process, but we need some commands
 	
+**Careful with redirections** there is a risk of overwritting a file !
+	
 ---
 ### Commands
 
@@ -451,8 +453,134 @@ Jules Verne
 --- 
 
 
-###Commands:  a bit more advanced
+##Commands:  a bit more advanced
 
-#### 
+Those are less usual for a enduser who just checks for some logs.
+
+### system status.
+
+- ps : **p**rocesses **s**napshot 
+
+	````
+	vagrant@precise32:~$ ps
+	  PID TTY          TIME CMD
+	 7382 pts/0    00:00:00 bash
+	 7776 pts/0    00:00:00 ps
+	 
+	vagrant@precise32:~$ ps -eaf
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 Oct07 ?        00:00:01 /sbin/init
+	root         2     0  0 Oct07 ?        00:00:00 [kthreadd]
+	root         3     2  0 Oct07 ?        00:00:01 [ksoftirqd/0]
+	root         6     2  0 Oct07 ?        00:00:00 [migration/0]
+	root         7     2  0 Oct07 ?        00:00:02 [watchdog/0]
+	
+	````
+	 
+	just have a status of the running processes, useful to verify if a process is running.
+	
+
+- top
+
+	an interactif process status, show memory and cpu information.
+
+---
 	
 	
+- netstat: **net**work **stat**us
+	
+	snapshot of the network connections:
+	
+	````
+	vagrant@precise32:~$ netstat -an 
+	Active Internet connections (servers and established)
+	Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+	tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
+	tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+	tcp        0      0 0.0.0.0:60272           0.0.0.0:*               LISTEN     
+	tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+	tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
+	````
+	
+	This command is usually interesting to verify which connexions are established, listening and even if you have some firewall issues (when you have a state 'SYN_SENT')
+	
+---
+
+##Commands:  a bit more advanced
+
+### filesystem modifications.
+
+
+
+- mkdir : **m**a**k**e **dir**rectory
+
+- rm ; rmdir : **r**e**m*ove file, or directory, simple or recursive
+
+- cp : **c**o**p**y file, directory, simple or recursive
+
+
+### edit a file
+
+- vi : **VI**sual editor
+
+	your worst nightmare, the consistent editor present everywhere..
+	
+	getting out of vi without saving a file
+	
+	````
+	*ESC* : q !
+	````
+	
+	saving and getting out of vi:
+	
+	````
+	*ESC* : w q !
+	````
+	
+---
+### save some space
+
+
+ - tar : **t**ape  **a**rchive, just assemble a file set into a file, no compression, non destruction
+ - gzip : compress a file (*g*nu *zip*), **remove the original file**
+ - gunzip : reciprocity of gzip: uncompress a file, remove the original file.
+ 
+ ````
+ vagrant@precise32:/vagrant/demo$ tar cvf jules-vernes.tar *.txt
+ 4548.txt
+ 4791.txt
+ pg5097.txt
+ vagrant@precise32:/vagrant/demo$ ls -lrt
+ total 3800
+ -rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
+ -rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
+ -rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
+ -rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:23 jules-vernes.tar
+ vagrant@precise32:/vagrant/demo$ gzip jules-vernes.tar 
+ vagrant@precise32:/vagrant/demo$ ls -lrt
+ total 2608
+ -rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
+ -rw-r--r-- 1 vagrant vagrant 534318 Oct  3 15:33 4548.txt
+ -rw-r--r-- 1 vagrant vagrant 460559 Oct  3 15:33 4791.txt
+ -rw-r--r-- 1 vagrant vagrant 722739 Oct  9 19:23 jules-vernes.tar.gz
+ vagrant@precise32:/vagrant/demo$ gunzip jules-vernes.tar.gz 
+ vagrant@precise32:/vagrant/demo$ ls -lrt
+ total 3800
+ -rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
+ -rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
+ -rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
+ -rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:26 jules-vernes.tar
+ ````
+---
+
+##Advanced shell
+
+### 
+
+
+
+
+
+
+
+
