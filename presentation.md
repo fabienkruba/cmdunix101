@@ -104,6 +104,12 @@ vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 LMtE2jc1
 ````
 
+*Note*: on Macosx you will need to force locale to C prior to the command
+````
+ export LC_ALL=C
+````
+
+
 Use the pseudo-random generator to generate random passwords of 8 characters
 
 ---
