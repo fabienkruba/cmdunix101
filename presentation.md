@@ -35,7 +35,7 @@ The kernel is part of the whole operating system
 - A process has a parent process ( PPID )
 - There is a root process called 'init' with pid 1, it adopts orphan processes
 
-````
+````bash
 vagrant@precise32:~$ ps -eaf | grep init
 root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 
@@ -61,8 +61,9 @@ root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 ## Base filesystem
 
 Unix leverage a unique file system tree, but can handle different filesystems under a *mount point*
+**There is no notion of drive letters**
 
-````
+````bash
 vagrant@precise32:~$ ls /
 bin   etc         lib         mnt   root  selinux  tmp      var
 boot  home        lost+found  opt   run   srv      usr      vmlinuz
@@ -95,7 +96,7 @@ Most common folders:
 A quick sample
 Having fun with pseudo file:
 
-````
+````bash
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 4bHzIiSB
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
@@ -105,11 +106,11 @@ LMtE2jc1
 ````
 
 *Note*: on Macosx you will need to force locale to C prior to the command
-````
+````bash
  export LC_ALL=C
 ````
 Which can be adjusted like this
-````
+````bash
 LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 8 | head -n 1
 ````
 
@@ -127,7 +128,7 @@ Use the pseudo-random generator to generate random passwords of 8 characters
 - A user usually cannot acces ressources of another user
 - A file has a certain number of permissions (Read/Write/Execute) for owner,member of group, and others
 
-````
+````bash
 vagrant@precise32:/vagrant/demo$ ls -la
 total 1900
 drwxr-xr-x 1 vagrant vagrant    170 Oct  3 15:33 .
@@ -180,7 +181,7 @@ And a lot of 'dead' ones: *Irix*, *SCO/UnixWare*...
 - shell can be programmed with scripts (with function, variables, conditional logic and loops)
 - standard input/output/errors of process can be redirected
 
-````
+````bash
 vagrant@precise32:/vagrant/demo$ ls -lrt
 total 1900
 -rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
@@ -235,32 +236,32 @@ total 1900
 
 - id , whoami
 
-	````
+````bash
 	vagrant@precise32:/vagrant/demo$ id
 	uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),110(sambashare),999(admin)
 	vagrant@precise32:/vagrant/demo$ whoami
 	vagrant
-	````
+````
 - pwd : **p**rint **w**orkding **d**irectory
 	
-	````
+````bash
 	vagrant@precise32:/vagrant/demo$ pwd
 	/vagrant/demo
-	````
+````
 - hostname
 
-	````
+````bash
 	vagrant@precise32:/vagrant/demo$ hostname
 	precise32
-	````
+````
 - date
 
-	````
+````bash
 vagrant@precise32:/vagrant/demo$ date
 Thu Oct  9 16:08:15 UTC 2014
 vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 20141009-1610
-	````
+````
 
 ---
 
@@ -270,11 +271,11 @@ vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 
 - man : **man**ual
 
-	````
+	````bash
 	man date
 	````
 	
-	````
+	````bash
 	DATE(1)                                                      User Commands                                                     DATE(1)
 
 	NAME
@@ -300,11 +301,11 @@ The most common help you can find on all unixes flavors.
 
 - info
 
-````
+````bash
 	info date
 ````
 
-````
+````bash
 File: coreutils.info,  Node: date invocation,  Next: arch invocation,  Up: System context
 
 21.1 `date': Print or set system date and time
@@ -333,7 +334,7 @@ environment variable, or the system default rules if `TZ' is not set.
 
 - ls  :  **l**i**s**t files
 
-	````	
+	````bash	
 	vagrant@precise32:/vagrant/demo$ ls
 	4548.txt  4791.txt  output  pg5097.txt
 	vagrant@precise32:/vagrant/demo$ ls -l
@@ -355,7 +356,7 @@ environment variable, or the system default rules if `TZ' is not set.
 
 - cd  : **c**hange **d**irectory
 
-	````
+	````bash
 	cd /
 	cd ..
 	cd /vagrant
@@ -370,7 +371,7 @@ environment variable, or the system default rules if `TZ' is not set.
 
 - wc : **w**ord **c**ount
 
-	````
+	````bash
 	vagrant@precise32:/vagrant/demo$ wc pg5097.txt 
 	 18519 142626 942654 pg5097.txt
 	vagrant@precise32:/vagrant/demo$ wc -l pg5097.txt 
@@ -380,7 +381,7 @@ environment variable, or the system default rules if `TZ' is not set.
 	counts lines/words/caracters
 - grep :  **G**lobal **R**egular **E**xpression **P**arser
 
-	````
+	````bash
 	vagrant@precise32:/vagrant/demo$ grep "Jules" *.txt
 	4548.txt:The Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
 	4548.txt:Author: Jules Verne
@@ -407,17 +408,17 @@ environment variable, or the system default rules if `TZ' is not set.
 
 - find : file finder
 	
-		````
+	````bash
 		vagrant@precise32:/vagrant/demo$ find . -name "*.txt"
 		./4548.txt
 		./4791.txt
 		./pg5097.txt
-		````
+	````
 	
 	Find allows to look for files based on a lot of patterns, (**man find**)
 	A very useful : finding files containing a certain pattern, 
 	
-	````
+	````bash
 vagrant@precise32:/vagrant/demo$ find . -name "*.txt" -exec grep "Verne" {} \;  -ls
 The Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
 Author: Jules Verne
@@ -460,7 +461,7 @@ Jules Verne
 	One of the most useful command to monitor a file: the -f option keeps reading the file and output content as it comes.
 	
 	
-	````
+	````bash
 	vagrant@precise32:/var/log$ tail -f /var/log/syslog
 	````
 --- 
@@ -477,7 +478,7 @@ Those are less usual for a enduser who just checks for some logs.
 
 - ps : **p**rocesses **s**napshot 
 
-	````
+	````bash
 	vagrant@precise32:~$ ps
 	  PID TTY          TIME CMD
 	 7382 pts/0    00:00:00 bash
@@ -507,7 +508,7 @@ Those are less usual for a enduser who just checks for some logs.
 	
 	snapshot of the network connections:
 	
-	````
+	````bash
 	vagrant@precise32:~$ netstat -an 
 	Active Internet connections (servers and established)
 	Proto Recv-Q Send-Q Local Address           Foreign Address         State      
@@ -543,13 +544,13 @@ Those are less usual for a enduser who just checks for some logs.
 	
 	getting out of vi without saving a file
 	
-	````
+	````bash
 	*ESC* : q !
 	````
 	
 	saving and getting out of vi:
 	
-	````
+	````bash
 	*ESC* : w q !
 	````
 	
@@ -561,7 +562,7 @@ Those are less usual for a enduser who just checks for some logs.
  - gzip : compress a file (*g*nu *zip*), **remove the original file**
  - gunzip : reciprocity of gzip: uncompress a file, remove the original file.
  
- ````
+````bash
  vagrant@precise32:/vagrant/demo$ tar cvf jules-vernes.tar *.txt
  4548.txt
  4791.txt
@@ -609,22 +610,116 @@ There is a command which was orinally designed to kill a process, now it also ca
 
 
   	
+---
 
+### ssh, scp
 
+SSH and SCP are two swiss army knives commands:
+
+ - ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel
+ 
+ - scp allows you to copy files from and to remote serveurs assuming you have an access to those.
+ 
+
+Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.
+
+(How to scp/ssh and rsync without prompting for password)[https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and]
 
 
 ---
 
 ##Advanced shell
 
-### 
+### features you might not use that much
 
+---
+
+### mount points
+
+- the unix arborescence does not include drive letters but mount points.
+- inserting a CD/DVD/USB drive or even a network drive is almost done transparently but behing the scene it is a 'mount' which is operated
+- on osX, dbl-click a dmg file ( disk image) will also be mounted in the filesystem.
+
+````bash
+vagrant@precise32:~$ mount
+/dev/mapper/precise32-root on / type ext4 (rw,errors=remount-ro)
+proc on /proc type proc (rw,noexec,nosuid,nodev)
+sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
+none on /sys/fs/fuse/connections type fusectl (rw)
+none on /sys/kernel/debug type debugfs (rw)
+none on /sys/kernel/security type securityfs (rw)
+udev on /dev type devtmpfs (rw,mode=0755)
+devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=0620)
+tmpfs on /run type tmpfs (rw,noexec,nosuid,size=10%,mode=0755)
+none on /run/lock type tmpfs (rw,noexec,nosuid,nodev,size=5242880)
+none on /run/shm type tmpfs (rw,nosuid,nodev)
+/dev/sda1 on /boot type ext2 (rw)
+rpc_pipefs on /run/rpc_pipefs type rpc_pipefs (rw)
+/vagrant on /vagrant type vboxsf (uid=1000,gid=1000,rw)
+vagrant@precise32:~$ 
+````
+
+
+---
+
+### du, df
+
+
+- **d**isk **u**sage : can also tells you what is the folders gruging more space
+
+- **d**isk **f**free
+
+````bash
+vagrant@precise32:/vagrant$ du -sk *
+1900	demo
+4	LICENSE
+4	plan.txt
+252	presentation
+20	presentation.md
+4	README.md
+12	themes
+8	Vagrantfile
+vagrant@precise32:/vagrant$ df -k
+Filesystem                 1K-blocks      Used Available Use% Mounted on
+/dev/mapper/precise32-root  82711212   2245752  76323176   3% /
+udev                          181464         4    181460   1% /dev
+tmpfs                          75600       280     75320   1% /run
+none                            5120         0      5120   0% /run/lock
+none                          189000         0    189000   0% /run/shm
+/dev/sda1                     233191     24417    196333  12% /boot
+/vagrant                   487712924 242070488 245642436  50% /vagrant
+
+````
+
+---
+### Identity switch.
+
+There are two commands which allows you to switch to another user :
+
+- su
+- sudo
+
+Usually both commands require using the user password.
+*sudo* allows more interesting behaviours like allowing some users to perform some defined commands *without issuing password*. 
+
+sudo is the usual way of perfoming system operations for the end user on Ubuntu flavored unixes, if user belongs to a certain group
+
+````bash
+	vagrant@precise32:/vagrant/demo$ id
+	uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),110(sambashare),999(admin)
+````
+
+(configured in /etc/sudoers)
 
 ---
 
 ## Thanks
 
-The presentation and the vagrant demo are on github:
+
+> There is two kinds of sysadmins, the ones who has done rm -rf / as root, and the ones who did not yet
+
+
+The presentation source and the vagrant demo are on github:
 
 https://github.com/fabienkruba/cmdunix101
 

@@ -70,7 +70,7 @@
 <li>A process has a parent process ( PPID )</li>
 <li>There is a root process called &#39;init&#39; with pid 1, it adopts orphan processes</li>
 </ul>
-<pre><code class='prettyprint '>vagrant@precise32:~$ ps -eaf | grep init
+<pre><code class='prettyprint bash'>vagrant@precise32:~$ ps -eaf | grep init
 root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 
 </code></pre></div>
@@ -95,8 +95,9 @@ root         1     0  0 Oct07 ?        00:00:01 /sbin/init
     
 <h2>Base filesystem</h2>
 
-<p>Unix leverage a unique file system tree, but can handle different filesystems under a <em>mount point</em></p>
-<pre><code class='prettyprint '>vagrant@precise32:~$ ls /
+<p>Unix leverage a unique file system tree, but can handle different filesystems under a <em>mount point</em>
+<strong>There is no notion of drive letters</strong></p>
+<pre><code class='prettyprint bash'>vagrant@precise32:~$ ls /
 bin   etc         lib         mnt   root  selinux  tmp      var
 boot  home        lost+found  opt   run   srv      usr      vmlinuz
 dev   initrd.img  media       proc  sbin  sys      vagrant
@@ -132,13 +133,22 @@ backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp  www
     
 <p>A quick sample
 Having fun with pseudo file:</p>
-<pre><code class='prettyprint '>vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
+<pre><code class='prettyprint bash'>vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 4bHzIiSB
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 A2GCVPpR
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 LMtE2jc1
 </code></pre>
+<p><em>Note</em>: on Macosx you will need to force locale to C prior to the command
+<code class='inline prettyprint'>bash
+ export LC_ALL=C
+</code>
+Which can be adjusted like this
+<code class='inline prettyprint'>bash
+LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 8 | head -n 1
+</code></p>
+
 <p>Use the pseudo-random generator to generate random passwords of 8 characters</p>
 </div>
       <div class='step' >
@@ -154,7 +164,7 @@ LMtE2jc1
 <li>A user usually cannot acces ressources of another user</li>
 <li>A file has a certain number of permissions (Read/Write/Execute) for owner,member of group, and others</li>
 </ul>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ ls -la
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ ls -la
 total 1900
 drwxr-xr-x 1 vagrant vagrant    170 Oct  3 15:33 .
 drwxr-xr-x 1 vagrant vagrant    476 Oct  3 18:46 ..
@@ -212,7 +222,7 @@ for example <em>pg5097.txt</em> is writable only for its owner. others can just 
 <li>shell can be programmed with scripts (with function, variables, conditional logic and loops)</li>
 <li>standard input/output/errors of process can be redirected</li>
 </ul>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ ls -lrt
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ ls -lrt
 total 1900
 -rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
 -rw-r--r-- 1 vagrant vagrant 534318 Oct  3 15:33 4548.txt
@@ -264,28 +274,33 @@ total 1900
 <h4>who,where, when, what</h4>
 
 <ul>
-<li><p>id , whoami</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ id
-uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),110(sambashare),999(admin)
-vagrant@precise32:/vagrant/demo$ whoami
-vagrant
-</code></pre></li>
-<li><p>pwd : <strong>p</strong>rint <strong>w</strong>orkding <strong>d</strong>irectory</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ pwd
-/vagrant/demo
-</code></pre></li>
-<li><p>hostname</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ hostname
-precise32
-</code></pre></li>
-<li><p>date</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ date
+<li>id , whoami</li>
+</ul>
+<pre><code class='prettyprint bash'>    vagrant@precise32:/vagrant/demo$ id
+    uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),110(sambashare),999(admin)
+    vagrant@precise32:/vagrant/demo$ whoami
+    vagrant
+</code></pre>
+<ul>
+<li>pwd : <strong>p</strong>rint <strong>w</strong>orkding <strong>d</strong>irectory</li>
+</ul>
+<pre><code class='prettyprint bash'>    vagrant@precise32:/vagrant/demo$ pwd
+    /vagrant/demo
+</code></pre>
+<ul>
+<li>hostname</li>
+</ul>
+<pre><code class='prettyprint bash'>    vagrant@precise32:/vagrant/demo$ hostname
+    precise32
+</code></pre>
+<ul>
+<li>date</li>
+</ul>
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ date
 Thu Oct  9 16:08:15 UTC 2014
 vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 20141009-1610
-</code></pre></li>
-</ul>
-</div>
+</code></pre></div>
       <div class='step' >
     
 <h3>Commands</h3>
@@ -294,8 +309,8 @@ vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 
 <ul>
 <li><p>man : <strong>man</strong>ual</p>
-<pre><code class='prettyprint '>man date
-</code></pre><pre><code class='prettyprint '>DATE(1)                                                      User Commands                                                     DATE(1)
+<pre><code class='prettyprint bash'>man date
+</code></pre><pre><code class='prettyprint bash'>DATE(1)                                                      User Commands                                                     DATE(1)
 
 NAME
        date - print or set the system date and time
@@ -321,8 +336,8 @@ DESCRIPTION
 <ul>
 <li>info</li>
 </ul>
-<pre><code class='prettyprint '>    info date
-</code></pre><pre><code class='prettyprint '>File: coreutils.info,  Node: date invocation,  Next: arch invocation,  Up: System context
+<pre><code class='prettyprint bash'>    info date
+</code></pre><pre><code class='prettyprint bash'>File: coreutils.info,  Node: date invocation,  Next: arch invocation,  Up: System context
 
 21.1 `date': Print or set system date and time
 ==============================================
@@ -348,7 +363,7 @@ environment variable, or the system default rules if `TZ' is not set.
 
 <ul>
 <li><p>ls  :  <strong>l</strong>i<strong>s</strong>t files</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ ls
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ ls
 4548.txt  4791.txt  output  pg5097.txt
 vagrant@precise32:/vagrant/demo$ ls -l
 total 1904
@@ -366,7 +381,7 @@ drwxr-xr-x 1 vagrant vagrant    476 Oct  3 18:46 ..
 -rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
 </code></pre></li>
 <li><p>cd  : <strong>c</strong>hange <strong>d</strong>irectory</p>
-<pre><code class='prettyprint '>cd /
+<pre><code class='prettyprint bash'>cd /
 cd ..
 cd /vagrant
 </code></pre>
@@ -379,14 +394,14 @@ cd /vagrant
 
 <ul>
 <li><p>wc : <strong>w</strong>ord <strong>c</strong>ount</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ wc pg5097.txt 
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ wc pg5097.txt 
  18519 142626 942654 pg5097.txt
 vagrant@precise32:/vagrant/demo$ wc -l pg5097.txt 
  18519 pg5097.txt
 </code></pre>
 <p>counts lines/words/caracters</p></li>
 <li><p>grep :  <strong>G</strong>lobal <strong>R</strong>egular <strong>E</strong>xpression <strong>P</strong>arser</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ grep "Jules" *.txt
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ grep "Jules" *.txt
 4548.txt:The Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
 4548.txt:Author: Jules Verne
 4548.txt:End of the Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
@@ -411,16 +426,14 @@ vagrant@precise32:/vagrant/demo$ grep "Nemo" *.txt | wc
 
 <ul>
 <li><p>find : file finder</p>
-<pre><code class='prettyprint '>````
-vagrant@precise32:/vagrant/demo$ find . -name "*.txt"
-./4548.txt
-./4791.txt
-./pg5097.txt
-````
+<pre><code class='prettyprint bash'>    vagrant@precise32:/vagrant/demo$ find . -name "*.txt"
+    ./4548.txt
+    ./4791.txt
+    ./pg5097.txt
 </code></pre>
 <p>Find allows to look for files based on a lot of patterns, (<strong>man find</strong>)
 A very useful : finding files containing a certain pattern, </p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ find . -name "*.txt" -exec grep "Verne" {} \;  -ls
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ find . -name "*.txt" -exec grep "Verne" {} \;  -ls
 The Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
 Author: Jules Verne
 End of the Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
@@ -459,7 +472,7 @@ there is no really way to limit the flow , but the command is useful to inject c
 <p>can show the first (<em>head</em>) or last (<em>tail</em>) lines of a file or a stream</p>
 
 <p>One of the most useful command to monitor a file: the -f option keeps reading the file and output content as it comes.</p>
-<pre><code class='prettyprint '>vagrant@precise32:/var/log$ tail -f /var/log/syslog
+<pre><code class='prettyprint bash'>vagrant@precise32:/var/log$ tail -f /var/log/syslog
 </code></pre></div>
       <div class='step' >
     </li>
@@ -475,7 +488,7 @@ there is no really way to limit the flow , but the command is useful to inject c
 
 <ul>
 <li><p>ps : <strong>p</strong>rocesses <strong>s</strong>napshot </p>
-<pre><code class='prettyprint '>vagrant@precise32:~$ ps
+<pre><code class='prettyprint bash'>vagrant@precise32:~$ ps
   PID TTY          TIME CMD
  7382 pts/0    00:00:00 bash
  7776 pts/0    00:00:00 ps
@@ -501,7 +514,7 @@ root         7     2  0 Oct07 ?        00:00:02 [watchdog/0]
 <li><p>netstat: <strong>net</strong>work <strong>stat</strong>us</p>
 
 <p>snapshot of the network connections:</p>
-<pre><code class='prettyprint '>vagrant@precise32:~$ netstat -an 
+<pre><code class='prettyprint bash'>vagrant@precise32:~$ netstat -an 
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State      
 tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN     
@@ -531,10 +544,10 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 <p>your worst nightmare, the consistent editor present everywhere..</p>
 
 <p>getting out of vi without saving a file</p>
-<pre><code class='prettyprint '>*ESC* : q !
+<pre><code class='prettyprint bash'>*ESC* : q !
 </code></pre>
 <p>saving and getting out of vi:</p>
-<pre><code class='prettyprint '>*ESC* : w q !
+<pre><code class='prettyprint bash'>*ESC* : w q !
 </code></pre></li>
 </ul>
 </div>
@@ -545,36 +558,36 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 <ul>
 <li>tar : <strong>t</strong>ape  <strong>a</strong>rchive, just assemble a file set into a file, no compression, non destruction</li>
 <li>gzip : compress a file (<em>g</em>nu <em>zip</em>), <strong>remove the original file</strong></li>
-<li><p>gunzip : reciprocity of gzip: uncompress a file, remove the original file.</p>
-<pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ tar cvf jules-vernes.tar *.txt
-4548.txt
-4791.txt
-pg5097.txt
-vagrant@precise32:/vagrant/demo$ ls -lrt
-total 3800
--rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
--rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
--rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
--rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:23 jules-vernes.tar
-vagrant@precise32:/vagrant/demo$ gzip jules-vernes.tar 
-vagrant@precise32:/vagrant/demo$ ls -lrt
-total 2608
--rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
--rw-r--r-- 1 vagrant vagrant 534318 Oct  3 15:33 4548.txt
--rw-r--r-- 1 vagrant vagrant 460559 Oct  3 15:33 4791.txt
--rw-r--r-- 1 vagrant vagrant 722739 Oct  9 19:23 jules-vernes.tar.gz
-vagrant@precise32:/vagrant/demo$ gunzip jules-vernes.tar.gz 
-vagrant@precise32:/vagrant/demo$ ls -lrt
-total 3800
--rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
--rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
--rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
--rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:26 jules-vernes.tar
+<li>gunzip : reciprocity of gzip: uncompress a file, remove the original file.</li>
+</ul>
+<pre><code class='prettyprint bash'> vagrant@precise32:/vagrant/demo$ tar cvf jules-vernes.tar *.txt
+ 4548.txt
+ 4791.txt
+ pg5097.txt
+ vagrant@precise32:/vagrant/demo$ ls -lrt
+ total 3800
+ -rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
+ -rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
+ -rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
+ -rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:23 jules-vernes.tar
+ vagrant@precise32:/vagrant/demo$ gzip jules-vernes.tar 
+ vagrant@precise32:/vagrant/demo$ ls -lrt
+ total 2608
+ -rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
+ -rw-r--r-- 1 vagrant vagrant 534318 Oct  3 15:33 4548.txt
+ -rw-r--r-- 1 vagrant vagrant 460559 Oct  3 15:33 4791.txt
+ -rw-r--r-- 1 vagrant vagrant 722739 Oct  9 19:23 jules-vernes.tar.gz
+ vagrant@precise32:/vagrant/demo$ gunzip jules-vernes.tar.gz 
+ vagrant@precise32:/vagrant/demo$ ls -lrt
+ total 3800
+ -rw-r--r-- 1 vagrant vagrant  942654 Oct  3 15:22 pg5097.txt
+ -rw-r--r-- 1 vagrant vagrant  534318 Oct  3 15:33 4548.txt
+ -rw-r--r-- 1 vagrant vagrant  460559 Oct  3 15:33 4791.txt
+ -rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:26 jules-vernes.tar
 </code></pre></div>
       <div class='step' >
     
-<h3>kill a process</h3></li>
-</ul>
+<h3>kill a process</h3>
 
 <p>Sometimes some processes need some <em>&#39;help&#39;</em>.</p>
 
@@ -590,13 +603,108 @@ total 3800
 </div>
       <div class='step' >
     
+<h3>ssh, scp</h3>
+
+<p>SSH and SCP are two swiss army knives commands:</p>
+
+<ul>
+<li><p>ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel</p></li>
+<li><p>scp allows you to copy files from and to remote serveurs assuming you have an access to those.</p></li>
+</ul>
+
+<p>Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.</p>
+
+<p>(How to scp/ssh and rsync without prompting for password)[<a href="https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and">https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and</a>]</p>
+</div>
+      <div class='step' >
+    
 <h2>Advanced shell</h2>
+
+<h3>features you might not use that much</h3>
+</div>
+      <div class='step' >
+    
+<h3>mount points</h3>
+
+<ul>
+<li>the unix arborescence does not include drive letters but mount points.</li>
+<li>inserting a CD/DVD/USB drive or even a network drive is almost done transparently but behing the scene it is a &#39;mount&#39; which is operated</li>
+<li>on osX, dbl-click a dmg file ( disk image) will also be mounted in the filesystem.</li>
+</ul>
+<pre><code class='prettyprint bash'>vagrant@precise32:~$ mount
+/dev/mapper/precise32-root on / type ext4 (rw,errors=remount-ro)
+proc on /proc type proc (rw,noexec,nosuid,nodev)
+sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
+none on /sys/fs/fuse/connections type fusectl (rw)
+none on /sys/kernel/debug type debugfs (rw)
+none on /sys/kernel/security type securityfs (rw)
+udev on /dev type devtmpfs (rw,mode=0755)
+devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=0620)
+tmpfs on /run type tmpfs (rw,noexec,nosuid,size=10%,mode=0755)
+none on /run/lock type tmpfs (rw,noexec,nosuid,nodev,size=5242880)
+none on /run/shm type tmpfs (rw,nosuid,nodev)
+/dev/sda1 on /boot type ext2 (rw)
+rpc_pipefs on /run/rpc_pipefs type rpc_pipefs (rw)
+/vagrant on /vagrant type vboxsf (uid=1000,gid=1000,rw)
+vagrant@precise32:~$ 
+</code></pre></div>
+      <div class='step' >
+    
+<h3>du, df</h3>
+
+<ul>
+<li><p><strong>d</strong>isk <strong>u</strong>sage : can also tells you what is the folders gruging more space</p></li>
+<li><p><strong>d</strong>isk <strong>f</strong>free</p></li>
+</ul>
+<pre><code class='prettyprint bash'>vagrant@precise32:/vagrant$ du -sk *
+1900    demo
+4   LICENSE
+4   plan.txt
+252 presentation
+20  presentation.md
+4   README.md
+12  themes
+8   Vagrantfile
+vagrant@precise32:/vagrant$ df -k
+Filesystem                 1K-blocks      Used Available Use% Mounted on
+/dev/mapper/precise32-root  82711212   2245752  76323176   3% /
+udev                          181464         4    181460   1% /dev
+tmpfs                          75600       280     75320   1% /run
+none                            5120         0      5120   0% /run/lock
+none                          189000         0    189000   0% /run/shm
+/dev/sda1                     233191     24417    196333  12% /boot
+/vagrant                   487712924 242070488 245642436  50% /vagrant
+
+</code></pre></div>
+      <div class='step' >
+    
+<h3>Identity switch.</h3>
+
+<p>There are two commands which allows you to switch to another user :</p>
+
+<ul>
+<li>su</li>
+<li>sudo</li>
+</ul>
+
+<p>Usually both commands require using the user password.
+<em>sudo</em> allows more interesting behaviours like allowing some users to perform some defined commands <em>without issuing password</em>. </p>
+
+<p>sudo is the usual way of perfoming system operations for the end user on Ubuntu flavored unixes, if user belongs to a certain group</p>
+<pre><code class='prettyprint bash'>    vagrant@precise32:/vagrant/demo$ id
+    uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),110(sambashare),999(admin)
+</code></pre>
+<p>(configured in /etc/sudoers)</p>
 </div>
       <div class='step' >
     
 <h2>Thanks</h2>
 
-<p>The presentation and the vagrant demo are on github:</p>
+<blockquote>
+<p>There is two kinds of sysadmins, the ones who has done rm -rf / as root, and the ones who did not yet</p>
+</blockquote>
+
+<p>The presentation source and the vagrant demo are on github:</p>
 
 <p><a href="https://github.com/fabienkruba/cmdunix101">https://github.com/fabienkruba/cmdunix101</a></p>
 
