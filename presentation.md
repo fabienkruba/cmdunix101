@@ -108,6 +108,10 @@ LMtE2jc1
 ````
  export LC_ALL=C
 ````
+Which can be adjusted like this
+````
+LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 8 | head -n 1
+````
 
 
 Use the pseudo-random generator to generate random passwords of 8 characters
