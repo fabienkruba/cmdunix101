@@ -199,10 +199,12 @@ for example <em>pg5097.txt</em> is writable only for its owner. others can just 
 <li>waits for commands, spaces between command and arguments. command and arguments can come from variables</li>
 <li>many commands accept jokers (*)</li>
 <li>if the terminal is smart enought, can handle colors as shell can handle different terminal types.</li>
+<li>modern shells interpreters have completion with <TAB></li>
+<li>shells have job control (ctrl-z/bg/jobs/fg): you can launch multiple commands in the same shell if needed</li>
 </ul>
-
-<h2>- modern shells interpreters have completion with <TAB></h2>
-
+</div>
+      <div class='step' >
+    
 <h3>The Shell</h3>
 
 <ul>
@@ -268,7 +270,7 @@ uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sud
 vagrant@precise32:/vagrant/demo$ whoami
 vagrant
 </code></pre></li>
-<li><p>pwd : <em>p</em>rint <em>w</em>orkding <em>d</em>irectory</p>
+<li><p>pwd : <strong>p</strong>rint <strong>w</strong>orkding <strong>d</strong>irectory</p>
 <pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ pwd
 /vagrant/demo
 </code></pre></li>
@@ -291,7 +293,7 @@ vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 <h4>getting help</h4>
 
 <ul>
-<li><p>man : <em>man</em>ual</p>
+<li><p>man : <strong>man</strong>ual</p>
 <pre><code class='prettyprint '>man date
 </code></pre><pre><code class='prettyprint '>DATE(1)                                                      User Commands                                                     DATE(1)
 
@@ -345,7 +347,7 @@ environment variable, or the system default rules if `TZ' is not set.
 <h3>Commands:  exploring the file system</h3>
 
 <ul>
-<li><p>ls  :  <em>L</em>i<em>S</em>t files</p>
+<li><p>ls  :  <strong>l</strong>i<strong>s</strong>t files</p>
 <pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ ls
 4548.txt  4791.txt  output  pg5097.txt
 vagrant@precise32:/vagrant/demo$ ls -l
@@ -363,12 +365,12 @@ drwxr-xr-x 1 vagrant vagrant    476 Oct  3 18:46 ..
 -rw-r--r-- 1 vagrant vagrant    243 Oct  9 15:15 output
 -rw-r--r-- 1 vagrant vagrant 942654 Oct  3 15:22 pg5097.txt
 </code></pre></li>
-<li><p>cd  : <strong>C</strong>hange <em>D</em>irectory</p>
+<li><p>cd  : <strong>c</strong>hange <strong>d</strong>irectory</p>
 <pre><code class='prettyprint '>cd /
 cd ..
 cd /vagrant
 </code></pre>
-<p>.. is a special directory reprenting the parent </p></li>
+<p><strong>..</strong> is a special directory reprenting the parent </p></li>
 </ul>
 </div>
       <div class='step' >
@@ -376,7 +378,7 @@ cd /vagrant
 <h3>Commands:  some utilities</h3>
 
 <ul>
-<li><p>wc : <strong>W</strong>ord <strong>C</strong>ount</p>
+<li><p>wc : <strong>w</strong>ord <strong>c</strong>ount</p>
 <pre><code class='prettyprint '>vagrant@precise32:/vagrant/demo$ wc pg5097.txt 
  18519 142626 942654 pg5097.txt
 vagrant@precise32:/vagrant/demo$ wc -l pg5097.txt 
@@ -466,7 +468,9 @@ there is no really way to limit the flow , but the command is useful to inject c
 <h2>Commands:  a bit more advanced</h2>
 
 <p>Those are less usual for a enduser who just checks for some logs.</p>
-
+</div>
+      <div class='step' >
+    
 <h3>system status.</h3>
 
 <ul>
@@ -511,8 +515,6 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 </div>
       <div class='step' >
     
-<h2>Commands:  a bit more advanced</h2>
-
 <h3>filesystem modifications.</h3>
 
 <ul>
@@ -570,10 +572,33 @@ total 3800
 -rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:26 jules-vernes.tar
 </code></pre></div>
       <div class='step' >
-    </li>
+    
+<h3>kill a process</h3></li>
 </ul>
 
+<p>Sometimes some processes need some <em>&#39;help&#39;</em>.</p>
+
+<p>There is a command which was orinally designed to kill a process, now it also can be used to send &#39;Signals&#39; to a process. A process can ignore certain signals or handle them.</p>
+
+<p><code class='inline prettyprint'>kill [pid]</code>  will send the INT (3) signal to a process, usually a nice way to tell a process to go away</p>
+
+<p><code class='inline prettyprint'>kill -9 [pid]</code> will send the KILL (9) signal to a process, usually no way to ignore it.</p>
+
+<p><code class='inline prettyprint'>man -s7 signal</code> will give you more informations on signals.</p>
+
+<p><em>if you launch a long running process in your shell, and use CTRL+C , it sends a &#39;INT&#39; signal to the process</em></p>
+</div>
+      <div class='step' >
+    
 <h2>Advanced shell</h2>
+</div>
+      <div class='step' >
+    
+<h2>Thanks</h2>
+
+<p>The presentation and the vagrant demo are on github:</p>
+
+<p><a href="https://github.com/fabienkruba/cmdunix101">https://github.com/fabienkruba/cmdunix101</a></p>
 
       </div>
     <script src="js/impress.js"></script>

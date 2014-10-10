@@ -160,6 +160,8 @@ And a lot of 'dead' ones: *Irix*, *SCO/UnixWare*...
 - many commands accept jokers (*)
 - if the terminal is smart enought, can handle colors as shell can handle different terminal types.
 - modern shells interpreters have completion with <TAB>
+- shells have job control (ctrl-z/bg/jobs/fg): you can launch multiple commands in the same shell if needed
+
 ---
 
 ### The Shell
@@ -229,7 +231,7 @@ total 1900
 	vagrant@precise32:/vagrant/demo$ whoami
 	vagrant
 	````
-- pwd : *p*rint *w*orkding *d*irectory
+- pwd : **p**rint **w**orkding **d**irectory
 	
 	````
 	vagrant@precise32:/vagrant/demo$ pwd
@@ -256,7 +258,7 @@ vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 
 #### getting help
 
-- man : *man*ual
+- man : **man**ual
 
 	````
 	man date
@@ -278,6 +280,7 @@ vagrant@precise32:/vagrant/demo$ date "+%Y%M%d-%H%m"
 	````
 
 The most common help you can find on all unixes flavors.
+
 
 --- 
 
@@ -318,7 +321,7 @@ environment variable, or the system default rules if `TZ' is not set.
 
 ###Commands:  exploring the file system
 
-- ls  :  *L*i*S*t files
+- ls  :  **l**i**s**t files
 
 	````	
 	vagrant@precise32:/vagrant/demo$ ls
@@ -340,7 +343,7 @@ environment variable, or the system default rules if `TZ' is not set.
 	````
 
 
-- cd  : **C**hange *D*irectory
+- cd  : **c**hange **d**irectory
 
 	````
 	cd /
@@ -348,14 +351,14 @@ environment variable, or the system default rules if `TZ' is not set.
 	cd /vagrant
 	````
 	
-	.. is a special directory reprenting the parent 
+	**..** is a special directory reprenting the parent 
 
 --- 
 
 
 ###Commands:  some utilities
 
-- wc : **W**ord **C**ount
+- wc : **w**ord **c**ount
 
 	````
 	vagrant@precise32:/vagrant/demo$ wc pg5097.txt 
@@ -455,7 +458,10 @@ Jules Verne
 
 ##Commands:  a bit more advanced
 
+
 Those are less usual for a enduser who just checks for some logs.
+
+--- 
 
 ### system status.
 
@@ -506,7 +512,7 @@ Those are less usual for a enduser who just checks for some logs.
 	
 ---
 
-##Commands:  a bit more advanced
+
 
 ### filesystem modifications.
 
@@ -572,10 +578,45 @@ Those are less usual for a enduser who just checks for some logs.
  -rw-r--r-- 1 vagrant vagrant 1945600 Oct  9 19:26 jules-vernes.tar
  ````
 ---
+### kill a process
+
+Sometimes some processes need some *'help'*.
+
+There is a command which was orinally designed to kill a process, now it also can be used to send 'Signals' to a process. A process can ignore certain signals or handle them.
+
+
+````kill [pid]````  will send the INT (3) signal to a process, usually a nice way to tell a process to go away
+
+
+
+````kill -9 [pid]```` will send the KILL (9) signal to a process, usually no way to ignore it.
+
+
+````man -s7 signal```` will give you more informations on signals.
+
+
+*if you launch a long running process in your shell, and use CTRL+C , it sends a 'INT' signal to the process*
+
+
+  	
+
+
+
+
+---
 
 ##Advanced shell
 
 ### 
+
+
+---
+
+## Thanks
+
+The presentation and the vagrant demo are on github:
+
+https://github.com/fabienkruba/cmdunix101
 
 
 
