@@ -623,7 +623,7 @@ SSH and SCP are two swiss army knives commands:
 
 Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.
 
-(How to scp/ssh and rsync without prompting for password)[https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and]
+[https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and]
 
 
 ---
