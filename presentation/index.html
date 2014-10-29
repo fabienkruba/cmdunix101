@@ -589,15 +589,20 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
     
 <h3>kill a process</h3>
 
-<p>Sometimes some processes need some <em>&#39;help&#39;</em>.</p>
+<ul>
+<li><p>Sometimes some processes need some <em>&#39;help&#39;</em>.</p></li>
+<li><p>There is a command which was orinally designed to kill a process, now it also can be used to send &#39;Signals&#39; to a process. A process can ignore certain signals or handle them.</p></li>
+<li><p>If you&#39;re not owner of the process ( or <em>root</em> ) you will be denied access.</p></li>
+<li><p>Terminate a program, the nice way (will send the INT (3) signal)</p>
 
-<p>There is a command which was orinally designed to kill a process, now it also can be used to send &#39;Signals&#39; to a process. A process can ignore certain signals or handle them.</p>
+<p><code class='inline prettyprint'>kill [pid]</code> </p></li>
+<li><p>Terminate a program, the rought way (will send the KILL (9) signal) </p>
 
-<p><code class='inline prettyprint'>kill [pid]</code>  will send the INT (3) signal to a process, usually a nice way to tell a process to go away</p>
+<p><code class='inline prettyprint'>kill -9 [pid]</code> </p></li>
+<li><p>List of the signals can be obtained with manual</p>
 
-<p><code class='inline prettyprint'>kill -9 [pid]</code> will send the KILL (9) signal to a process, usually no way to ignore it.</p>
-
-<p><code class='inline prettyprint'>man -s7 signal</code> will give you more informations on signals.</p>
+<p><code class='inline prettyprint'>man -s7 signal</code> </p></li>
+</ul>
 
 <p><em>if you launch a long running process in your shell, and use CTRL+C , it sends a &#39;INT&#39; signal to the process</em></p>
 </div>
@@ -610,9 +615,8 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 <ul>
 <li><p>ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel</p></li>
 <li><p>scp allows you to copy files from and to remote serveurs assuming you have an access to those.</p></li>
+<li><p>Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.</p></li>
 </ul>
-
-<p>Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.</p>
 
 <p>[<a href="https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and">https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and</a>]</p>
 </div>

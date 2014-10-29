@@ -591,19 +591,23 @@ Those are less usual for a enduser who just checks for some logs.
 ---
 ### kill a process
 
-Sometimes some processes need some *'help'*.
+- Sometimes some processes need some *'help'*.
 
-There is a command which was orinally designed to kill a process, now it also can be used to send 'Signals' to a process. A process can ignore certain signals or handle them.
+- There is a command which was orinally designed to kill a process, now it also can be used to send 'Signals' to a process. A process can ignore certain signals or handle them.
 
+- If you're not owner of the process ( or *root* ) you will be denied access.
 
-````kill [pid]````  will send the INT (3) signal to a process, usually a nice way to tell a process to go away
+- Terminate a program, the nice way (will send the INT (3) signal)
 
+	````kill [pid]```` 
+	
+- Terminate a program, the rought way (will send the KILL (9) signal) 
 
+	````kill -9 [pid]```` 
+	
+- List of the signals can be obtained with manual
 
-````kill -9 [pid]```` will send the KILL (9) signal to a process, usually no way to ignore it.
-
-
-````man -s7 signal```` will give you more informations on signals.
+	````man -s7 signal```` 
 
 
 *if you launch a long running process in your shell, and use CTRL+C , it sends a 'INT' signal to the process*
@@ -616,12 +620,11 @@ There is a command which was orinally designed to kill a process, now it also ca
 
 SSH and SCP are two swiss army knives commands:
 
- - ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel
+ - ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel 
  
  - scp allows you to copy files from and to remote serveurs assuming you have an access to those.
  
-
-Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.
+ - Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.
 
 [https://blogs.oracle.com/jkini/entry/how_to_scp_scp_and]
 
@@ -637,7 +640,7 @@ Under certain conditions you can bypass the password exchange, using public key 
 ### mount points
 
 - the unix arborescence does not include drive letters but mount points.
-- inserting a CD/DVD/USB drive or even a network drive is almost done transparently but behing the scene it is a 'mount' which is operated
+- inserting a CD/DVD/USB drive or even a network drive is almost done transparently but behing the scene it is a ls'mount' which is operated
 - on osX, dbl-click a dmg file ( disk image) will also be mounted in the filesystem.
 
 ````bash
