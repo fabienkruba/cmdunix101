@@ -12,6 +12,17 @@
 - advanced shell, switching identities (*danger*)
 
 ---
+
+
+
+Some foundations on Unix(es)
+----------------------------
+
+### kernel,processes
+### filesystem
+### users and permissions
+
+---
 ## Some foundations on Unix(es)
 
 
@@ -26,8 +37,8 @@ The kernel is part of the whole operating system
 - security
 
 ---
-
-## Processes (1/2)
+## Some foundations on Unix(es)
+### Processes (1/2)
 
 - Every program runs under a context called a *process*
 - Kernel manages its execution
@@ -43,9 +54,9 @@ root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 
 ---
 
+## Some foundations on Unix(es)
 
-
-## Processes (2/2)
+### Processes (2/2)
 
 - A process has its memory space allocated by the kernel.
 - A process has an 'environment' ( a key/value hash)
@@ -57,8 +68,8 @@ root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 
 
 ---
-
-## Base filesystem
+## Some foundations on Unix(es)
+### Base filesystem(1/2)
 
 Unix leverage a unique file system tree, but can handle different filesystems under a *mount point*
 **There is no notion of drive letters**
@@ -83,7 +94,8 @@ Most common folders:
 
 
 ---
-## Base filesystem
+## Some foundations on Unix(es)
+### Base filesystem(2/2)
 
 Most common folders:
 
@@ -93,8 +105,9 @@ Most common folders:
 - /home : usually parent folders of user accounts (non root)
 
 --- 
-A quick sample
-Having fun with pseudo file:
+## Some foundations on Unix(es)
+### Quick sample
+A quick sample, using a pseudo file:
 
 ````bash
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
@@ -105,11 +118,14 @@ vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 LMtE2jc1
 ````
 
+
 *Note*: on Macosx you will need to force locale to C prior to the command
+
 ````bash
  export LC_ALL=C
 ````
 Which can be adjusted like this
+
 ````bash
 LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 8 | head -n 1
 ````
@@ -161,6 +177,13 @@ But also
 And a lot of 'dead' ones: *Irix*, *SCO/UnixWare*... 
 
 ---
+Basic Commands
+--------------
+
+###The Shell
+###Commands
+
+---
 ## Basic commands
 
 ### The Shell
@@ -168,9 +191,9 @@ And a lot of 'dead' ones: *Irix*, *SCO/UnixWare*...
 - base (and default) interface between the terminal and the kernel
 - it is a process
 - waits for commands, spaces between command and arguments. command and arguments can come from variables
-- many commands accept jokers (*)
-- if the terminal is smart enought, can handle colors as shell can handle different terminal types.
-- modern shells interpreters have completion with <TAB>
+- many commands accept jokers (*) or even regexp
+- shell can handle multiple terminal types, (vt100, xterm) with different capacities (colors..)
+- modern shells interpreters have completion with *[[TAB]]*
 - shells have job control (ctrl-z/bg/jobs/fg): you can launch multiple commands in the same shell if needed
 
 ---
@@ -228,6 +251,11 @@ total 1900
 	And now we can chain elementary commands into a bigger and more complex process, but we need some commands
 	
 **Careful with redirections** there is a risk of overwritting a file !
+	
+---
+And now some commands
+---------------------
+
 	
 ---
 ### Commands
@@ -466,6 +494,15 @@ Jules Verne
 	````
 --- 
 
+Commands:  a bit more advanced
+------------------------------
+
+### Getting system status
+### Modify filesystem
+### Edit files
+### Save space (archiving)
+
+---
 
 ##Commands:  a bit more advanced
 
@@ -531,7 +568,7 @@ Those are less usual for a enduser who just checks for some logs.
 
 - mkdir : **m**a**k**e **dir**rectory
 
-- rm ; rmdir : **r**e**m*ove file, or directory, simple or recursive
+- rm ; rmdir : **r**e**m**ove file, or directory, simple or recursive
 
 - cp : **c**o**p**y file, directory, simple or recursive
 
@@ -554,6 +591,9 @@ Those are less usual for a enduser who just checks for some logs.
 	*ESC* : w q !
 	````
 	
+	(Free electrons has a great memento)[http://free-electrons.com/doc/training/embedded-linux/vi_memento.pdf]
+	
+
 ---
 ### save some space
 
@@ -668,7 +708,7 @@ vagrant@precise32:~$
 ### du, df
 
 
-- **d**isk **u**sage : can also tells you what is the folders gruging more space
+- **d**isk **u**sage : can also tells you what are the folders gruging more space
 
 - **d**isk **f**free
 

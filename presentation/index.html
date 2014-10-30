@@ -47,6 +47,16 @@
     
 <h2>Some foundations on Unix(es)</h2>
 
+<h3>kernel,processes</h3>
+
+<h3>filesystem</h3>
+
+<h3>users and permissions</h3>
+</div>
+      <div class='step' >
+    
+<h2>Some foundations on Unix(es)</h2>
+
 <h3>Kernel, processes</h3>
 
 <p>The kernel is part of the whole operating system </p>
@@ -61,7 +71,9 @@
 </div>
       <div class='step' >
     
-<h2>Processes (1/2)</h2>
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Processes (1/2)</h3>
 
 <ul>
 <li>Every program runs under a context called a <em>process</em></li>
@@ -76,7 +88,9 @@ root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 </code></pre></div>
       <div class='step' >
     
-<h2>Processes (2/2)</h2>
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Processes (2/2)</h3>
 
 <ul>
 <li>A process has its memory space allocated by the kernel.</li>
@@ -93,7 +107,9 @@ root         1     0  0 Oct07 ?        00:00:01 /sbin/init
 </div>
       <div class='step' >
     
-<h2>Base filesystem</h2>
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Base filesystem(1/2)</h3>
 
 <p>Unix leverage a unique file system tree, but can handle different filesystems under a <em>mount point</em>
 <strong>There is no notion of drive letters</strong></p>
@@ -118,7 +134,9 @@ backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp  www
 </div>
       <div class='step' >
     
-<h2>Base filesystem</h2>
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Base filesystem(2/2)</h3>
 
 <p>Most common folders:</p>
 
@@ -131,8 +149,11 @@ backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp  www
 </div>
       <div class='step' >
     
-<p>A quick sample
-Having fun with pseudo file:</p>
+<h2>Some foundations on Unix(es)</h2>
+
+<h3>Quick sample</h3>
+
+<p>A quick sample, using a pseudo file:</p>
 <pre><code class='prettyprint bash'>vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 4bHzIiSB
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
@@ -140,15 +161,12 @@ A2GCVPpR
 vagrant@precise32:~$ cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 8| head -n 1
 LMtE2jc1
 </code></pre>
-<p><em>Note</em>: on Macosx you will need to force locale to C prior to the command
-<code class='inline prettyprint'>bash
- export LC_ALL=C
-</code>
-Which can be adjusted like this
-<code class='inline prettyprint'>bash
-LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 8 | head -n 1
-</code></p>
-
+<p><em>Note</em>: on Macosx you will need to force locale to C prior to the command</p>
+<pre><code class='prettyprint bash'> export LC_ALL=C
+</code></pre>
+<p>Which can be adjusted like this</p>
+<pre><code class='prettyprint bash'>LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 8 | head -n 1
+</code></pre>
 <p>Use the pseudo-random generator to generate random passwords of 8 characters</p>
 </div>
       <div class='step' >
@@ -199,6 +217,14 @@ for example <em>pg5097.txt</em> is writable only for its owner. others can just 
 </div>
       <div class='step' >
     
+<h2>Basic Commands</h2>
+
+<h3>The Shell</h3>
+
+<h3>Commands</h3>
+</div>
+      <div class='step' >
+    
 <h2>Basic commands</h2>
 
 <h3>The Shell</h3>
@@ -207,9 +233,9 @@ for example <em>pg5097.txt</em> is writable only for its owner. others can just 
 <li>base (and default) interface between the terminal and the kernel</li>
 <li>it is a process</li>
 <li>waits for commands, spaces between command and arguments. command and arguments can come from variables</li>
-<li>many commands accept jokers (*)</li>
-<li>if the terminal is smart enought, can handle colors as shell can handle different terminal types.</li>
-<li>modern shells interpreters have completion with <TAB></li>
+<li>many commands accept jokers (*) or even regexp</li>
+<li>shell can handle multiple terminal types, (vt100, xterm) with different capacities (colors..)</li>
+<li>modern shells interpreters have completion with <em>[[TAB]]</em></li>
 <li>shells have job control (ctrl-z/bg/jobs/fg): you can launch multiple commands in the same shell if needed</li>
 </ul>
 </div>
@@ -266,6 +292,10 @@ total 1900
 </ul>
 
 <p><strong>Careful with redirections</strong> there is a risk of overwritting a file !</p>
+</div>
+      <div class='step' >
+    
+<h2>And now some commands</h2>
 </div>
       <div class='step' >
     
@@ -480,6 +510,18 @@ there is no really way to limit the flow , but the command is useful to inject c
 
 <h2>Commands:  a bit more advanced</h2>
 
+<h3>Getting system status</h3>
+
+<h3>Modify filesystem</h3>
+
+<h3>Edit files</h3>
+
+<h3>Save space (archiving)</h3>
+</div>
+      <div class='step' >
+    
+<h2>Commands:  a bit more advanced</h2>
+
 <p>Those are less usual for a enduser who just checks for some logs.</p>
 </div>
       <div class='step' >
@@ -532,7 +574,7 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 
 <ul>
 <li><p>mkdir : <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>rectory</p></li>
-<li><p>rm ; rmdir : <strong>r</strong>e*<em>m</em>ove file, or directory, simple or recursive</p></li>
+<li><p>rm ; rmdir : <strong>r</strong>e<strong>m</strong>ove file, or directory, simple or recursive</p></li>
 <li><p>cp : <strong>c</strong>o<strong>p</strong>y file, directory, simple or recursive</p></li>
 </ul>
 
@@ -548,7 +590,8 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 </code></pre>
 <p>saving and getting out of vi:</p>
 <pre><code class='prettyprint bash'>*ESC* : w q !
-</code></pre></li>
+</code></pre>
+<p>(Free electrons has a great memento)[<a href="http://free-electrons.com/doc/training/embedded-linux/vi_memento.pdf">http://free-electrons.com/doc/training/embedded-linux/vi_memento.pdf</a>]</p></li>
 </ul>
 </div>
       <div class='step' >
@@ -613,7 +656,7 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 <p>SSH and SCP are two swiss army knives commands:</p>
 
 <ul>
-<li><p>ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel</p></li>
+<li><p>ssh allows you to connect to a remote server, but also to stream content throught the connection using an encrypted tunnel </p></li>
 <li><p>scp allows you to copy files from and to remote serveurs assuming you have an access to those.</p></li>
 <li><p>Under certain conditions you can bypass the password exchange, using public key authentication, allowing you to perform operations in batch instead of typing the password all the time.</p></li>
 </ul>
@@ -632,7 +675,7 @@ tcp        0      0 10.0.2.15:22            10.0.2.2:52713          ESTABLISHED
 
 <ul>
 <li>the unix arborescence does not include drive letters but mount points.</li>
-<li>inserting a CD/DVD/USB drive or even a network drive is almost done transparently but behing the scene it is a &#39;mount&#39; which is operated</li>
+<li>inserting a CD/DVD/USB drive or even a network drive is almost done transparently but behing the scene it is a ls&#39;mount&#39; which is operated</li>
 <li>on osX, dbl-click a dmg file ( disk image) will also be mounted in the filesystem.</li>
 </ul>
 <pre><code class='prettyprint bash'>vagrant@precise32:~$ mount
@@ -657,7 +700,7 @@ vagrant@precise32:~$
 <h3>du, df</h3>
 
 <ul>
-<li><p><strong>d</strong>isk <strong>u</strong>sage : can also tells you what is the folders gruging more space</p></li>
+<li><p><strong>d</strong>isk <strong>u</strong>sage : can also tells you what are the folders gruging more space</p></li>
 <li><p><strong>d</strong>isk <strong>f</strong>free</p></li>
 </ul>
 <pre><code class='prettyprint bash'>vagrant@precise32:/vagrant$ du -sk *
