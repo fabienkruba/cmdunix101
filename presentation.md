@@ -18,9 +18,9 @@
 Some foundations on Unix(es)
 ----------------------------
 
-### kernel,processes
-### filesystem
-### users and permissions
+### Kernel and Processes
+### Filesystem
+### Users and permissions
 
 ---
 ## Some foundations on Unix(es)
