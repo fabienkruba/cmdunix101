@@ -763,11 +763,14 @@ sudo is the usual way of perfoming system operations for the end user on Ubuntu 
 > There is two kinds of sysadmins, the ones who has done rm -rf / as root, and the ones who did not yet
 
 
-The presentation source and the vagrant demo are on github:
+The presentation source and the vagrant demo files are on github:
 
 https://github.com/fabienkruba/cmdunix101
 
 
+
+There are some unices commands memento such as 
+[Free electrons' one](http://free-electrons.com/doc/training/embedded-linux/command_memento.pdf)
 
 
 
