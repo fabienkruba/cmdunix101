@@ -6,7 +6,7 @@ This repository contains tutorial for Command Line 101
 
 # Generate presentation
 
-	This presentation was written in markown, and uses [mdpress](https://github.com/egonSchiele/mdpress) to generate the deck itself.
+This presentation was written in markown, and uses [mdpress](https://github.com/egonSchiele/mdpress) to generate the deck itself.
 # to generate the presentation:
 
 ````
