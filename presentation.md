@@ -444,7 +444,8 @@ environment variable, or the system default rules if `TZ' is not set.
 	````
 	
 	Find allows to look for files based on a lot of patterns, (**man find**)
-	A very useful : finding files containing a certain pattern, 
+	
+	A very useful form of find command : finding files containing a certain pattern, 
 	
 	````bash
 vagrant@precise32:/vagrant/demo$ find . -name "*.txt" -exec grep "Verne" {} \;  -ls

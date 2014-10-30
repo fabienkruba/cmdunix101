@@ -461,8 +461,9 @@ vagrant@precise32:/vagrant/demo$ grep "Nemo" *.txt | wc
     ./4791.txt
     ./pg5097.txt
 </code></pre>
-<p>Find allows to look for files based on a lot of patterns, (<strong>man find</strong>)
-A very useful : finding files containing a certain pattern, </p>
+<p>Find allows to look for files based on a lot of patterns, (<strong>man find</strong>)</p>
+
+<p>A very useful form of find command : finding files containing a certain pattern, </p>
 <pre><code class='prettyprint bash'>vagrant@precise32:/vagrant/demo$ find . -name "*.txt" -exec grep "Verne" {} \;  -ls
 The Project Gutenberg EBook of Cinq Semaines En Ballon, by Jules Verne
 Author: Jules Verne
